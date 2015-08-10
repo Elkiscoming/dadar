@@ -1,0 +1,3 @@
+Use this link:
+	Creating a spatial database with PostGIS 2.0 and PostgreSQL 9.1+
+	https://docs.djangoproject.com/en/1.8/ref/contrib/gis/install/postgis/
