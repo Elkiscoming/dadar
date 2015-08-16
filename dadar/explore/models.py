@@ -4,17 +4,17 @@ from django.contrib.gis.db import models
 
 
 class User(models.Model):
-    data = models.CharField(max_length=20000)
+    pass
 
 
 class UserAction(models.Model):
-    user = models.ForeignKey(User)
-    action = models.CharField(max_length=10)
+    pass
 
 
 class Venue(models.Model):
+    user = models.ForeignKey(User)
     foursquare_id = models.CharField(max_length=300)
     name = models.CharField(max_length=300)
     lat = models.FloatField()
     lng = models.FloatField()
-    image = models.ImageField()
+    image = models.CharField(max_length=500)

@@ -8,16 +8,23 @@
     <script src="{% static "jquery-2.1.4.min.js" %}"></script>
 </head>
 <body>
-salamati
+<div id="images">
+</div>
 <script>
+    var id;
     if (navigator.geolocation) { // device can return its location
         navigator.geolocation.getCurrentPosition(function (position) {
             console.log(position.coords.latitude);
             console.log(position.coords.longitude);
             console.log('init/'+ position.coords.latitude + ',' + position.coords.longitude);
             $.get('init/'+ position.coords.latitude + ',' + position.coords.longitude, function(data, status, xhr){
-                console.log(data);
-            })
+                id = parseInt(data);
+                $.get('image/' + id + '/0', function(data, status, xhr){
+                    var image = $('<img>');
+                    image.attr('src', data);
+                    image.appendTo('#images');
+                });
+            });
         });
     }
 </script>
