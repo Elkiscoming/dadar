@@ -4,5 +4,6 @@ from django.conf.urls import include, url
 import views
 
 urlpatterns = [
-    url(r'^init/(?P<location>([0-9]+)\.([0-9]+),([0-9]+)\.([0-9]+))', views.init)
+    url(r'^$', views.index),
+    url(r'^init/(?P<location>([0-9]+)\.([0-9]+),([0-9]+)\.([0-9]+))', views.init),
 ]
