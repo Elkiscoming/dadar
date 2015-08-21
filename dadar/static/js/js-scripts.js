@@ -24,7 +24,7 @@ var loadImage = function (number, isHidden) {
         image.css('width', '100%');
 
         var div = $('<div>');
-        div.attr('class', 'col l12');
+        div.attr('class', 'col l12 waves-effect waves-light waves-block');
         div.attr('id', 'image-' + number);
         div.css('position', 'absolute');
         if (isHidden)

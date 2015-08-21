@@ -10,3 +10,7 @@
     position: relative;
     height: 100vh;
 }
+
+.btn.btn-floating {
+    z-index: 2;
+}
