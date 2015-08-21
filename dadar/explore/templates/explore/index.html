@@ -14,13 +14,13 @@
 <div class="row">
     <div class="col l8 offset-l2">
         <div class="center-align">
-            <div id="images" class="row" style="position: relative;">
-                <div class="col l1" style="position: absolute;">
-                    <a id="left-arrow" class="btn btn-floating cyan"><i
+            <div id="images" class="row grey" style="position: relative; height: 100vh">
+                <div class="col l1" style="position: absolute; top: 50%">
+                    <a id="left-arrow" class="btn btn-large btn-floating cyan"><i
                             class="large material-icons">chevron_left</i></a>
                 </div>
-                <div class="col l1 offset-l11" style="position: absolute;">
-                    <a id="right-arrow" class="btn btn-floating cyan"><i class="large material-icons">chevron_right</i></a>
+                <div class="col l1 offset-l11" style="position: absolute; top: 50%">
+                    <a id="right-arrow" class="btn btn-large btn-floating cyan"><i class="large material-icons">chevron_right</i></a>
                 </div>
                 <div class="col l1 offset-l5" style="position: absolute;">
                     <a class="btn btn-floating red"><i class="large material-icons">favorite</i></a>
@@ -29,7 +29,7 @@
                     <a class="btn btn-floating indigo"><i class="large material-icons">speaker_notes</i></a>
                 </div>
 
-                <div class="col l4 offset-l4" id="preloader" style="position: absolute;">
+                <div class="col l4 offset-l4" id="preloader" style="position: absolute; top: 50%">
                     <div class="preloader-wrapper big active">
                         <div class="spinner-layer spinner-blue-only">
                             <div class="circle-clipper left">
@@ -55,15 +55,15 @@
         $.get('image/' + id + '/' + number, function (data, status, xhr) {
             console.log('image' + number + ' loaded');
             var image = $('<img>');
-            if (isHidden)
-                image.hide();
             image.attr('src', data);
-            image.attr('id', 'image' + number);
-            image.attr('class', 'responsive-img');
-            //image.css('z-index', number);
+            //image.attr('class', 'responsive-img');
+            image.css('width', '100%');
 
             var div = $('<div>');
+            if (isHidden)
+                div.hide();
             div.attr('class', 'col l12');
+            div.attr('id', 'image' + number);
             div.css('position', 'absolute');
             image.appendTo(div);
             div.appendTo('#images');
