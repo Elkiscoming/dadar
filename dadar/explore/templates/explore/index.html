@@ -16,10 +16,18 @@
         <div class="center-align">
             <div class="row">
                 <a id="left-arrow" class="btn btn-floating cyan"><i class="large material-icons">chevron_left</i></a>
-                <a class="btn btn-floating cyan"><i class="large material-icons">chevron_right</i></a>
+                <a id="right-arrow" class="btn btn-floating cyan"><i class="large material-icons">chevron_right</i></a>
                 <a class="btn btn-floating red"><i class="large material-icons">favorite</i></a>
                 <a class="btn btn-floating indigo"><i class="large material-icons">speaker_notes</i></a>
+
                 <div id="images">
+                    <div class="preloader-wrapper big active" id="preloader">
+                        <div class="spinner-layer spinner-blue-only">
+                            <div class="circle-clipper left">
+                                <div class="circle"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -44,6 +52,10 @@
             image.attr('data-roll', 'page');
             image.css('z-index', number);
             image.appendTo('#images');
+            if(number == num) {
+                $('#preloader').hide();
+                $('#image' + num).fadeIn("slow");
+            }
         });
     };
     if (navigator.geolocation) { // device can return its location
@@ -60,10 +72,20 @@
         });
     }
     $('#left-arrow').click(function () {
+        console.log(num);
         $('#image' + num).hide();
         num++;
-        $('#image' + num).fadeIn("slow");
+        if($('#image' + num).length)
+            $('#image' + num).fadeIn("slow");
+        else
+            $('#preloader').show();
         loadImage(num + preload, true);
+    });
+    $('#right-arrow').click(function(){
+        console.log(num);
+        $('#image' + num).hide();
+        num --;
+        $('#image' + num).fadeIn("slow");
     });
 </script>
 </body>
