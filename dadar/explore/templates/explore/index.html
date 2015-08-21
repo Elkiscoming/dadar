@@ -14,14 +14,23 @@
 <div class="row">
     <div class="col l8 offset-l2">
         <div class="center-align">
-            <div class="row">
-                <a id="left-arrow" class="btn btn-floating cyan"><i class="large material-icons">chevron_left</i></a>
-                <a id="right-arrow" class="btn btn-floating cyan"><i class="large material-icons">chevron_right</i></a>
-                <a class="btn btn-floating red"><i class="large material-icons">favorite</i></a>
-                <a class="btn btn-floating indigo"><i class="large material-icons">speaker_notes</i></a>
+            <div id="images" class="row" style="position: relative;">
+                <div class="col l1" style="position: absolute;">
+                    <a id="left-arrow" class="btn btn-floating cyan"><i
+                            class="large material-icons">chevron_left</i></a>
+                </div>
+                <div class="col l1 offset-l11" style="position: absolute;">
+                    <a id="right-arrow" class="btn btn-floating cyan"><i class="large material-icons">chevron_right</i></a>
+                </div>
+                <div class="col l1 offset-l5" style="position: absolute;">
+                    <a class="btn btn-floating red"><i class="large material-icons">favorite</i></a>
+                </div>
+                <div class="col l1 offset-l6" style="position: absolute;">
+                    <a class="btn btn-floating indigo"><i class="large material-icons">speaker_notes</i></a>
+                </div>
 
-                <div id="images">
-                    <div class="preloader-wrapper big active" id="preloader">
+                <div class="col l4 offset-l4" id="preloader" style="position: absolute;">
+                    <div class="preloader-wrapper big active">
                         <div class="spinner-layer spinner-blue-only">
                             <div class="circle-clipper left">
                                 <div class="circle"></div>
@@ -29,6 +38,7 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
@@ -40,6 +50,7 @@
     var id;
     var num = 0;
     var preload = 4;
+    var maxCount = 30;
     var loadImage = function (number, isHidden) {
         $.get('image/' + id + '/' + number, function (data, status, xhr) {
             console.log('image' + number + ' loaded');
@@ -49,10 +60,14 @@
             image.attr('src', data);
             image.attr('id', 'image' + number);
             image.attr('class', 'responsive-img');
-            image.attr('data-roll', 'page');
-            image.css('z-index', number);
-            image.appendTo('#images');
-            if(number == num) {
+            //image.css('z-index', number);
+
+            var div = $('<div>');
+            div.attr('class', 'col l12');
+            div.css('position', 'absolute');
+            image.appendTo(div);
+            div.appendTo('#images');
+            if (number == num) {
                 $('#preloader').hide();
                 $('#image' + num).fadeIn("slow");
             }
@@ -74,17 +89,20 @@
     $('#left-arrow').click(function () {
         console.log(num);
         $('#image' + num).hide();
-        num++;
-        if($('#image' + num).length)
+        if (num < maxCount - 1)
+            num++;
+        if ($('#image' + num).length)
             $('#image' + num).fadeIn("slow");
         else
             $('#preloader').show();
-        loadImage(num + preload, true);
+        if (num + preload < maxCount)
+            loadImage(num + preload, true);
     });
-    $('#right-arrow').click(function(){
+    $('#right-arrow').click(function () {
         console.log(num);
         $('#image' + num).hide();
-        num --;
+        if (num > 0)
+            num--;
         $('#image' + num).fadeIn("slow");
     });
 </script>
