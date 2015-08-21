@@ -1,0 +1,12 @@
+.pos-absolute {
+    position: absolute;
+}
+
+.vertical-center {
+    top: 50%;
+}
+
+#images {
+    position: relative;
+    height: 100vh;
+}

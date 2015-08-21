@@ -14,22 +14,21 @@
 <div class="row">
     <div class="col l8 offset-l2">
         <div class="center-align">
-            <div id="images" class="row grey" style="position: relative; height: 100vh">
-                <div class="col l1" style="position: absolute; top: 50%">
-                    <a id="left-arrow" class="btn btn-large btn-floating cyan"><i
-                            class="large material-icons">chevron_left</i></a>
+            <div id="images" class="row">
+                <div class="col l1 pos-absolute vertical-center">
+                    <a id="left-arrow" class="btn btn-large btn-floating cyan"><i class="large material-icons">chevron_left</i></a>
                 </div>
-                <div class="col l1 offset-l11" style="position: absolute; top: 50%">
+                <div class="col l1 offset-l11 pos-absolute vertical-center">
                     <a id="right-arrow" class="btn btn-large btn-floating cyan"><i class="large material-icons">chevron_right</i></a>
                 </div>
-                <div class="col l1 offset-l5" style="position: absolute;">
+                <div class="col l1 offset-l5 pos-absolute">
                     <a class="btn btn-floating red"><i class="large material-icons">favorite</i></a>
                 </div>
-                <div class="col l1 offset-l6" style="position: absolute;">
+                <div class="col l1 offset-l6 pos-absolute">
                     <a class="btn btn-floating indigo"><i class="large material-icons">speaker_notes</i></a>
                 </div>
 
-                <div class="col l4 offset-l4" id="preloader" style="position: absolute; top: 50%">
+                <div class="col l4 offset-l4 pos-absolute vertical-center" id="preloader">
                     <div class="preloader-wrapper big active">
                         <div class="spinner-layer spinner-blue-only">
                             <div class="circle-clipper left">
@@ -46,65 +45,6 @@
 
 <script src="{% static 'js/jquery-2.1.4.min.js' %}"></script>
 <script src="{% static 'js/materialize.js' %}"></script>
-<script>
-    var id;
-    var num = 0;
-    var preload = 4;
-    var maxCount = 30;
-    var loadImage = function (number, isHidden) {
-        $.get('image/' + id + '/' + number, function (data, status, xhr) {
-            console.log('image' + number + ' loaded');
-            var image = $('<img>');
-            image.attr('src', data);
-            //image.attr('class', 'responsive-img');
-            image.css('width', '100%');
-
-            var div = $('<div>');
-            if (isHidden)
-                div.hide();
-            div.attr('class', 'col l12');
-            div.attr('id', 'image' + number);
-            div.css('position', 'absolute');
-            image.appendTo(div);
-            div.appendTo('#images');
-            if (number == num) {
-                $('#preloader').hide();
-                $('#image' + num).fadeIn("slow");
-            }
-        });
-    };
-    if (navigator.geolocation) { // device can return its location
-        navigator.geolocation.getCurrentPosition(function (position) {
-            console.log(position.coords.latitude);
-            console.log(position.coords.longitude);
-            console.log('init/' + position.coords.latitude + ',' + position.coords.longitude);
-            $.get('init/' + position.coords.latitude + ',' + position.coords.longitude, function (data, status, xhr) {
-                id = parseInt(data);
-                loadImage(0, false);
-                for (var i = 0; i < preload; i++)
-                    loadImage(1 + i, true);
-            });
-        });
-    }
-    $('#left-arrow').click(function () {
-        console.log(num);
-        $('#image' + num).hide();
-        if (num < maxCount - 1)
-            num++;
-        if ($('#image' + num).length)
-            $('#image' + num).fadeIn("slow");
-        else
-            $('#preloader').show();
-        if (num + preload < maxCount)
-            loadImage(num + preload, true);
-    });
-    $('#right-arrow').click(function () {
-        console.log(num);
-        $('#image' + num).hide();
-        if (num > 0)
-            num--;
-        $('#image' + num).fadeIn("slow");
-    });
-</script>
+<script src="{% static 'js/js-scripts.js' %}"></script>
 </body>
 </html>
