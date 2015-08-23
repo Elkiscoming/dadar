@@ -3,13 +3,29 @@
 <html>
 <head lang="en">
     <meta charset="UTF-8">
-    <title></title>
-
-    <script src="{% static "jquery-2.1.4.min.js" %}"></script>
+    <title> Dadar | Find places you love!</title>
+    <script src="{% static 'jquery-2.1.4.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'CSS/main.css' %}">
 </head>
-<body>
-<div id="images">
+
+<div class="slides">
+    <div class="slide-container">
+        <div class="slide">
+            <img src="http://s6.uplod.ir/i/00665/k51rqxo5dq0n.jpg" />
+        </div>
+        <div class="nav">
+            <label class="prev"><span class="slider">&#x2039;</span></label>
+            <label class="next"><span class="slider">&#x203a;</span></label>
+        </div>
+    </div>
+
+    <div class="nav-dots">
+        <label class="button"><i class="fa fa-heart fa-3x"></i></label>
+
+        <label class="button"><i class="fa fa-comments fa-3x"></i></label>
+    </div>
 </div>
+
 <script>
     var id;
     if (navigator.geolocation) { // device can return its location
@@ -28,5 +44,4 @@
         });
     }
 </script>
-</body>
 </html>
