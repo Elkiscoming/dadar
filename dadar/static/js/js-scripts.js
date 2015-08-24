@@ -1,6 +1,6 @@
 var id;
 var num = 0;
-var preload = 4;
+var preload = 29;
 var maxCount = 30;
 var preloader = $('#preloader');
 
@@ -17,25 +17,33 @@ var showNewImage = function (prevNumber, nextNumber) {
     $('#image-' + prevNumber).hide();
     showImage(nextNumber);
 };
-var loadImage = function (number, isHidden) {
+var loadImage = function (number) {
     $.get('image/' + id + '/' + number, function (data, status, xhr) {
         var image = $('<img>');
         image.attr('src', data);
-        image.css('width', '100%');
 
-        var div = $('<div>');
-        div.attr('class', 'col l12 waves-effect waves-light waves-block');
-        div.attr('id', 'image-' + number);
-        div.css('position', 'absolute');
-        if (isHidden)
-            div.hide();
+        var container = $('<div>');
+        container.attr('class', '');
 
-        image.appendTo(div);
-        div.appendTo('#images');
+        var card = $('<div>');
+        card.attr('class', 'card');
 
-        if (number == num) {
-            showImage(number);
-        }
+        var imageCard = $('<div>');
+        imageCard.attr('class', 'card-image');
+
+        var cardContent = $('<div>');
+        cardContent.attr('class', 'card-content');
+
+        var title = $('<p>');
+        title.html("salam");
+
+        title.appendTo(cardContent);
+
+        image.appendTo(imageCard);
+        imageCard.appendTo(card);
+        cardContent.appendTo(card);
+        card.appendTo(container);
+        container.appendTo('#images-' + number % 3);
     });
 };
 if (navigator.geolocation) { // device can return its location
@@ -45,9 +53,9 @@ if (navigator.geolocation) { // device can return its location
         console.log('init/' + position.coords.latitude + ',' + position.coords.longitude);
         $.get('init/' + position.coords.latitude + ',' + position.coords.longitude, function (data, status, xhr) {
             id = parseInt(data);
-            loadImage(0, false);
-            for (var i = 1; i <= preload; i++)
-                loadImage(i, true);
+//            loadImage(0);
+            for (var i = 0; i <= preload; i++)
+                loadImage(i);
         });
     });
 }
