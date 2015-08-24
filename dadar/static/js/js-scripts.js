@@ -24,6 +24,7 @@ var loadImage = function (number) {
 
         var container = $('<div>');
         container.attr('class', '');
+        container.css('position', 'relative');
 
         var card = $('<div>');
         card.attr('class', 'card');
@@ -36,6 +37,17 @@ var loadImage = function (number) {
 
         var title = $('<p>');
         title.html("salam");
+
+        var button = $('<a>');
+        button.attr('class', 'btn-floating btn-large');
+        button.css('position', 'absolute');
+        /*button.css('top', '2%');
+        button.css('left', '2%');
+        */
+        button.css('transform', 'translate(-50%, -50%)');
+        button.css('opacity', '0.5');
+
+        button.appendTo(container);
 
         title.appendTo(cardContent);
 
