@@ -20,7 +20,7 @@ var showNewImage = function (prevNumber, nextNumber) {
 var loadImage = function (number, isHidden) {
     $.get('image/' + id + '/' + number, function (data, status, xhr) {
         var image = $('<img>');
-        image.attr('src', data);
+        image.attr('src', JSON.parse(data)['image'] );
         image.css('width', '100%');
 
         var div = $('<div>');
