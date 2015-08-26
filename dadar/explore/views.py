@@ -12,7 +12,7 @@ def init(request, location):
     user.save()
     for item in result['groups'][0]['items']:
         venue = Venue()
-        if Venue.objects.filter(foursquare_id=item['venue']['id'])[0] is None:
+        if len(Venue.objects.filter(foursquare_id=item['venue']['id'])) == 0:
             venue.foursquare_id = item['venue']['id']
             venue.name = item['venue']['name']
             venue.lat = item['venue']['location']['lat']
