@@ -21,6 +21,10 @@ def init(request, location):
             venue.image = venue_details['venue']['bestPhoto']['prefix'] \
                           + 'original' + venue_details['venue']['bestPhoto']['suffix']
             venue.save()
+            for category in venue_details['venue']['categories']:
+                if Category.objects.get(name=category['name']) is not None:
+                    venue.categories.add(Category.objects.get(name=category['name']))
+            venue.save()
         else:
             venue = Venue.objects.filter(foursquare_id=item['venue']['id'])[0]
         user.venue_set.add(venue)
@@ -39,5 +43,17 @@ def get_venue(request, user_id, place_number):
     venue_data = dict()
     venue_data['name'] = venue.name
     venue_data['image'] = venue.image
+    venue_data['category'] = venue.categories.first().image
     # venue_data['icon'] = venue.category.image
     return HttpResponse(json.dumps(venue_data))
+
+
+def update_categories(categories=None):
+    if categories is None:
+        categories = client.venues.categories()['categories']
+    for item in categories:
+        category = Category()
+        category.name = item['name']
+        category.image = item['icon']['prefix'] + "_88" + item['icon']['suffix']
+        category.save()
+        update_categories(item['categories'])
