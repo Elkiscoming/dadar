@@ -37,7 +37,7 @@ var loadImage = function (number) {
         cardContent.attr('class', 'card-content');
 
         var title = $('<p>');
-        title.html("salam");
+        title.html(JSON.parse(data)['name']);
 
         var button = $('<a>');
         button.attr('class', 'btn-floating btn-large');
