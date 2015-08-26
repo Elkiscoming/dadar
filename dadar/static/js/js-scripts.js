@@ -20,7 +20,8 @@ var showNewImage = function (prevNumber, nextNumber) {
 var loadImage = function (number) {
     $.get('image/' + id + '/' + number, function (data, status, xhr) {
         var image = $('<img>');
-        image.attr('src', JSON.parse(data)['image'] );
+        var dataJSON = JSON.parse(data);
+        image.attr('src', dataJSON['image'] );
         image.css('width', '100%');
 
         var container = $('<div>');
@@ -37,18 +38,25 @@ var loadImage = function (number) {
         cardContent.attr('class', 'card-content');
 
         var title = $('<p>');
-        title.html("salam");
+        title.html(dataJSON['name']);
 
-        var button = $('<a>');
-        button.attr('class', 'btn-floating btn-large');
-        button.css('position', 'absolute');
+        var category = $('<img>');
+        category.attr('class', 'circle responsive-img');
+        category.attr('src', 'https://facebook.github.io/flux/img/flux_logo.svg');
+
+
+        var categoryDiv = $('<div>');
+        categoryDiv.attr('class', 'circle teal');
+        categoryDiv.css('position', 'absolute');
+        categoryDiv.css('z-index', '1');
+
+        category.appendTo(categoryDiv);
         /*button.css('top', '2%');
         button.css('left', '2%');
         */
-        button.css('transform', 'translate(-50%, -50%)');
-        button.css('opacity', '0.5');
-
-        button.appendTo(container);
+        categoryDiv.css('transform', 'translate(-30%, -30%)');
+        categoryDiv.css('opacity', '0.5');
+        categoryDiv.appendTo(container);
 
         title.appendTo(cardContent);
 
