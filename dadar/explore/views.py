@@ -54,6 +54,6 @@ def update_categories(categories=None):
     for item in categories:
         category = Category()
         category.name = item['name']
-        category.image = item['icon']['prefix'] + "_88" + item['icon']['suffix']
+        category.image = item['icon']['prefix'] + "88" + item['icon']['suffix']
         category.save()
         update_categories(item['categories'])

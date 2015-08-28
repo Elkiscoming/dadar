@@ -42,7 +42,7 @@ var loadImage = function (number) {
 
         var category = $('<img>');
         category.attr('class', 'circle responsive-img');
-        category.attr('src', 'https://facebook.github.io/flux/img/flux_logo.svg');
+        category.attr('src', dataJSON['category']);
 
 
         var categoryDiv = $('<div>');
